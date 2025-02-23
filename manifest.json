@@ -1,13 +1,22 @@
 {
-    "manifest_version": 3,
-    "name": "NaverNewsHider",
-    "description": "Hides content in Naver main page including news.",
-    "version":"1.0",
-    "icon": {
-        "16": "image.png"
-    },
-    "action": {
-        "default_title": "NaverNewsHider",
-        "default_popup": "control.html"
-    }
+  "manifest_version": 3,
+  "name": "NaverNewsHider",
+  "description": "Hides content in Naver main page including news.",
+  "version": "1.0",
+  "icon": {
+    "16": "icon\naver.png"
+  },
+  "action": {
+    "default_title": "NaverNewsHider",
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "tabs",
+    "<all_urls>",
+    "activeTab",
+    "scripting",
+    "cookies",
+    "declarativeContent",
+    "storage"
+  ]
 }

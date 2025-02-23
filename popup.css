@@ -1,0 +1,12 @@
+.header {
+  width: 250px;
+}
+
+.header .title {
+  font-size: 28px;
+}
+
+#hideNews {
+  width: 20px;
+  height: 20px;
+}
