@@ -3,20 +3,21 @@
   "name": "NaverNewsHider",
   "description": "Hides content in Naver main page including news.",
   "version": "1.0",
-  "icon": {
-    "16": "icon\naver.png"
-  },
   "action": {
-    "default_title": "NaverNewsHider",
+    "default_icon": {
+      "16": "icon/naver.png"
+    },
     "default_popup": "popup.html"
   },
-  "permissions": [
-    "tabs",
-    "<all_urls>",
-    "activeTab",
-    "scripting",
-    "cookies",
-    "declarativeContent",
-    "storage"
-  ]
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["*://*.naver.com/*"],
+      "js": ["contentscript.js"]
+    }
+  ],
+  "permissions": ["tabs", "activeTab", "scripting", "storage"],
+  "host_permissions": ["*://*.naver.com/*"]
 }
