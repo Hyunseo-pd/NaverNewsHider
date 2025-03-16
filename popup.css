@@ -3,7 +3,8 @@
 }
 
 .header .title {
-  font-size: 28px;
+  font-size: 24px;
+  font-weight: 700;
 }
 
 #hideNews {
@@ -11,6 +12,7 @@
   align-items: center;
   gap: 0.5rem;
   cursor: pointer;
+  font-size: 16px;
 }
 
 #hideFeed {
@@ -18,4 +20,21 @@
   align-items: center;
   gap: 0.5rem;
   cursor: pointer;
+  font-size: 16px;
+}
+
+#hideWidget {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+#hideShopping {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  font-size: 16px;
 }
