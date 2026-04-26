@@ -1,10 +1,126 @@
-.header {
-  width: 250px;
+@font-face {
+  font-family: "NanumGothicLight";
+  font-weight: 200;
+  src: url("../fonts/NanumGothicLight.otf") format("opentype");
 }
 
-.header .title {
+@font-face {
+  font-family: "NanumGothic";
+  font-weight: 400;
+  src: url("../fonts/NanumGothic.otf") format("opentype");
+}
+
+@font-face {
+  font-family: "NanumGothicBold";
+  font-weight: 600;
+  src: url("../fonts/NanumGothicBold.otf") format("opentype");
+}
+
+@font-face {
+  font-family: "NanumGothicExtraBold";
+  font-weight: 800;
+  src: url("../fonts/NanumGothicExtraBold.otf") format("opentype");
+}
+
+[type="checkbox"] {
+  appearance: none;
+  position: relative;
+  border: max(2px, 0.1em) solid #adadad;
+  border-radius: 1.25em;
+  width: 2.25em;
+  height: 1.25em;
+}
+[type="checkbox"]::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 1em;
+  height: 1em;
+  border-radius: 50%;
+  transform: scale(0.8);
+  background-color: #adadad;
+  transition: left 250ms linear;
+}
+[type="checkbox"]:checked::before {
+  background-color: white;
+  left: 1em;
+}
+
+[type="checkbox"]:checked {
+  background-color: #2db400;
+  border-color: #2db400;
+}
+[type="checkbox"]:disabled {
+  border-color: lightgray;
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+[type="checkbox"]:disabled:before {
+  background-color: lightgray;
+}
+
+[type="checkbox"]:disabled + span {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+[type="checkbox"]:focus-visible {
+  outline-offset: max(2px, 0.1em);
+  outline: max(2px, 0.1em) solid tomato;
+}
+[type="checkbox"]:enabled:hover {
+  box-shadow: 0 0 0 max(3px, 0.1em) lightgray;
+}
+
+.header {
+  width: 250px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: "NanumGothic";
+  font-weight: 400;
   font-size: 24px;
-  font-weight: 700;
+}
+
+hr {
+  border: 0;
+  height: 0.1rem;
+  background-color: #adadad;
+}
+
+ul {
+  list-style: none;
+  padding-left: 1rem;
+  margin-top: 0.2rem;
+  margin-bottom: 0.2rem;
+}
+
+/*.contentList :before {
+  content: "";
+  width: 0.1rem;
+  height: calc(100% - 12rem);
+  background-color: #cccccc;
+  position: absolute;
+  left: 1rem;
+  top: 5.2rem;
+}
+.sidebarList :before {
+  content: "";
+  width: 0.1rem;
+  height: calc(100% - 12rem);
+  background-color: #cccccc;
+  position: absolute;
+  left: 1rem;
+  top: 11.5rem;
+}*/
+#hideContent {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  font-family: "NanumGothic";
+  font-weight: 400;
+  font-size: 16px;
 }
 
 #hideNews {
@@ -12,6 +128,17 @@
   align-items: center;
   gap: 0.5rem;
   cursor: pointer;
+  font-family: "NanumGothicLight";
+  font-weight: 200;
+  font-size: 16px;
+}
+#hideShopping {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  font-family: "NanumGothicLight";
+  font-weight: 200;
   font-size: 16px;
 }
 
@@ -20,21 +147,43 @@
   align-items: center;
   gap: 0.5rem;
   cursor: pointer;
+  font-family: "NanumGothicLight";
+  font-weight: 200;
   font-size: 16px;
 }
-
+#hideSidebar {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  font-family: "NanumGothic";
+  font-weight: 400;
+  font-size: 16px;
+}
+#hideWeather {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  font-family: "NanumGothicLight";
+  font-weight: 200;
+  font-size: 16px;
+}
+#hideStock {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  font-family: "NanumGothicLight";
+  font-weight: 200;
+  font-size: 16px;
+}
 #hideWidget {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
   cursor: pointer;
-  font-size: 16px;
-}
-
-#hideShopping {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  cursor: pointer;
+  font-family: "NanumGothicLight";
+  font-weight: 200;
   font-size: 16px;
 }
