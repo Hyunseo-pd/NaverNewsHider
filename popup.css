@@ -78,14 +78,14 @@
   align-items: center;
   gap: 0.5rem;
   font-family: "NanumGothic";
-  font-weight: 400;
+  font-weight: 600;
   font-size: 24px;
 }
 
 hr {
   border: 0;
-  height: 0.1rem;
-  background-color: #adadad;
+  height: 0.05rem;
+  background-color: #2db400;
 }
 
 ul {

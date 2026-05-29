@@ -90,6 +90,7 @@ function unHideWidget() {
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   if (request.action === "hide") {
     console.log("received");
+    console.log(request);
     chrome.storage.sync.get(
       [
         "hideNews",
@@ -141,7 +142,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
             function: result.hideWidget ? hideWidget : unHideWidget,
           });
         }
-      }
+      },
     );
   }
 });
