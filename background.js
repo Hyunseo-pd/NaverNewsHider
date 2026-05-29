@@ -1,16 +1,5 @@
 console.log("✅ background.js 실행됨!");
 
-function hideNews() {
-  const newsstand = document.querySelector("#newsstand");
-  newsstand.style.visibility = "hidden";
-  console.log("hidden");
-}
-
-function unHideNews() {
-  const newsstand = document.querySelector("#newsstand");
-  newsstand.style.visibility = "";
-  console.log("unhidden");
-}
 function hideFeed() {
   const feed = document.querySelector("#feed");
   feed.style.visibility = "hidden";
@@ -104,12 +93,12 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
       (result) => {
         console.log(result);
 
-        if (result.hideNews !== undefined) {
+        /*if (result.hideNews !== undefined) {
           chrome.scripting.executeScript({
             target: { tabId: sender.tab.id },
             function: result.hideNews ? hideNews : unHideNews,
           });
-        }
+        }*/
 
         if (result.hideFeed !== undefined) {
           chrome.scripting.executeScript({

@@ -131,17 +131,6 @@ hideContentBtn.addEventListener("change", async (event) => {
   let [tab] = await chrome.tabs.query({ active: true });
 
   const value = event.target.checked;
-  if (value) {
-    chrome.scripting.executeScript({
-      target: { tabId: tab.id },
-      function: hideNews,
-    });
-  } else {
-    chrome.scripting.executeScript({
-      target: { tabId: tab.id },
-      function: unHideNews,
-    });
-  }
 
   const key = "hideContent";
   console.log(`${key}` + " is " + `${value}`);
