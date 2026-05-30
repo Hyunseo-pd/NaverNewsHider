@@ -24,15 +24,19 @@ const setChromeStorage = (key, value, callback) => {
 };
 
 //콘텐츠 숨기기
-
-hideContentBtn.addEventListener("change", async (event) => {
-  let [tab] = await chrome.tabs.query({ active: true });
-
+hideContentBtn.addEventListener("change", (event) => {
   const value = event.target.checked;
 
-  const key = "hideContent";
-  console.log(`${key}` + " is " + `${value}`);
-  setChromeStorage(key, value);
+  hideNewsBtn.querySelector("input").checked = value;
+  hideShoppingBtn.querySelector("input").checked = value;
+  hideFeedBtn.querySelector("input").checked = value;
+
+  chrome.storage.sync.set({
+    hideContent: value,
+    hideNews: value,
+    hideShopping: value,
+    hideFeed: value,
+  });
 });
 
 //뉴스 숨기기
@@ -65,22 +69,19 @@ hideShoppingBtn.addEventListener("change", async (event) => {
 
 //사이드바 숨기기
 
-hideSidebarBtn.addEventListener("change", async (event) => {
-  let [tab] = await chrome.tabs.query({ active: true });
-
+hideSidebarBtn.addEventListener("change", (event) => {
   const value = event.target.checked;
-  if (value) {
-    hideWeatherBtn.click();
-    hideStockBtn.click();
-    hideWidgetBtn.click();
-  } else {
-    hideWeatherBtn.click();
-    hideStockBtn.click();
-    hideWidgetBtn.click();
-  }
-  const key = "hideSidebar";
-  console.log(`${key}` + " is " + `${value}`);
-  setChromeStorage(key, value);
+
+  hideWeatherBtn.querySelector("input").checked = value;
+  hideStockBtn.querySelector("input").checked = value;
+  hideWidgetBtn.querySelector("input").checked = value;
+
+  chrome.storage.sync.set({
+    hideSidebar: value,
+    hideWeather: value,
+    hideStock: value,
+    hideWidget: value,
+  });
 });
 
 //날씨 숨기기
@@ -110,8 +111,11 @@ hideWidgetBtn.addEventListener("change", async (event) => {
   setChromeStorage(key, value);
 });
 
-//불러오기
+/*function setCheckBox(label, value) {
+  label.querySelector("input").checked = value;
+}*/
 
+//불러오기
 chrome.storage.sync.get(
   [
     "hideContent",
