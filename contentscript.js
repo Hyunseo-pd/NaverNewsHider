@@ -72,3 +72,14 @@ function loadAndApplySettings() {
 window.addEventListener("load", () => {
   loadAndApplySettings();
 });
+
+//storage읽기
+chrome.storage.onChanged.addListener((changes, areaName) => {
+  if (areaName !== "sync") {
+    return;
+  }
+
+  Object.keys(changes).forEach((key) => {
+    applySetting(key, changes[key].newValue);
+  });
+});

@@ -23,108 +23,6 @@ const setChromeStorage = (key, value, callback) => {
   });
 };
 
-//뉴스 숨기기
-
-function hideNews() {
-  const newsstand = document.querySelector("#newsstand");
-  newsstand.style.visibility = "hidden";
-  console.log("hidden");
-}
-
-function unHideNews() {
-  const newsstand = document.querySelector("#newsstand");
-  newsstand.style.visibility = "";
-  console.log("unhidden");
-}
-
-hideNewsBtn.addEventListener("change", async (event) => {
-  let [tab] = await chrome.tabs.query({ active: true });
-
-  const value = event.target.checked;
-  if (value) {
-    chrome.scripting.executeScript({
-      target: { tabId: tab.id },
-      function: hideNews,
-    });
-  } else {
-    chrome.scripting.executeScript({
-      target: { tabId: tab.id },
-      function: unHideNews,
-    });
-  }
-  const key = "hideNews";
-  console.log(`${key}` + " is " + `${value}`);
-  setChromeStorage(key, value);
-});
-
-//피드 숨기기
-
-function hideFeed() {
-  const feed = document.querySelector("#feed");
-  feed.style.visibility = "hidden";
-  console.log("hidden");
-}
-
-function unHideFeed() {
-  const feed = document.querySelector("#feed");
-  feed.style.visibility = "";
-  console.log("unhidden");
-}
-
-hideFeedBtn.addEventListener("change", async (event) => {
-  let [tab] = await chrome.tabs.query({ active: true });
-
-  const value = event.target.checked;
-  if (value) {
-    chrome.scripting.executeScript({
-      target: { tabId: tab.id },
-      function: hideFeed,
-    });
-  } else {
-    chrome.scripting.executeScript({
-      target: { tabId: tab.id },
-      function: unHideFeed,
-    });
-  }
-  const key = "hideFeed";
-  console.log(`${key}` + " is " + `${value}`);
-  setChromeStorage(key, value);
-});
-
-//쇼핑숨기기
-
-function hideShopping() {
-  const widget = document.querySelector("#shopping");
-  widget.style.visibility = "hidden";
-  console.log("hidden");
-}
-
-function unHideShopping() {
-  const widget = document.querySelector("#shopping");
-  widget.style.visibility = "";
-  console.log("unhidden");
-}
-
-hideShoppingBtn.addEventListener("change", async (event) => {
-  let [tab] = await chrome.tabs.query({ active: true });
-
-  const value = event.target.checked;
-  if (value) {
-    chrome.scripting.executeScript({
-      target: { tabId: tab.id },
-      function: hideShopping,
-    });
-  } else {
-    chrome.scripting.executeScript({
-      target: { tabId: tab.id },
-      function: unHideShopping,
-    });
-  }
-  const key = "hideShopping";
-  console.log(`${key}` + " is " + `${value}`);
-  setChromeStorage(key, value);
-});
-
 //콘텐츠 숨기기
 
 hideContentBtn.addEventListener("change", async (event) => {
@@ -133,6 +31,34 @@ hideContentBtn.addEventListener("change", async (event) => {
   const value = event.target.checked;
 
   const key = "hideContent";
+  console.log(`${key}` + " is " + `${value}`);
+  setChromeStorage(key, value);
+});
+
+//뉴스 숨기기
+
+hideNewsBtn.addEventListener("change", async (event) => {
+  const value = event.target.checked;
+
+  const key = "hideNews";
+  console.log(`${key}` + " is " + `${value}`);
+  setChromeStorage(key, value);
+});
+
+//피드 숨기기
+
+hideFeedBtn.addEventListener("change", async (event) => {
+  const value = event.target.checked;
+  const key = "hideFeed";
+  console.log(`${key}` + " is " + `${value}`);
+  setChromeStorage(key, value);
+});
+
+//쇼핑숨기기
+
+hideShoppingBtn.addEventListener("change", async (event) => {
+  const value = event.target.checked;
+  const key = "hideShopping";
   console.log(`${key}` + " is " + `${value}`);
   setChromeStorage(key, value);
 });
@@ -159,33 +85,8 @@ hideSidebarBtn.addEventListener("change", async (event) => {
 
 //날씨 숨기기
 
-function hideWeather() {
-  const weather = document.querySelector('[aria-label="날씨"]');
-  weather.style.visibility = "hidden";
-  console.log("hidden");
-}
-
-function unHideWeather() {
-  const weather = document.querySelector('[aria-label="날씨"]');
-  weather.style.visibility = "";
-  console.log("unhidden");
-}
-
 hideWeatherBtn.addEventListener("change", async (event) => {
-  let [tab] = await chrome.tabs.query({ active: true });
-
   const value = event.target.checked;
-  if (value) {
-    chrome.scripting.executeScript({
-      target: { tabId: tab.id },
-      function: hideWeather,
-    });
-  } else {
-    chrome.scripting.executeScript({
-      target: { tabId: tab.id },
-      function: unHideWeather,
-    });
-  }
   const key = "hideWeather";
   console.log(`${key}` + " is " + `${value}`);
   setChromeStorage(key, value);
@@ -193,33 +94,8 @@ hideWeatherBtn.addEventListener("change", async (event) => {
 
 //증시숨기기
 
-function hideStock() {
-  const stock = document.querySelector('[aria-label="증시"]');
-  stock.style.visibility = "hidden";
-  console.log("hidden");
-}
-
-function unHideStock() {
-  const stock = document.querySelector('[aria-label="증시"]');
-  stock.style.visibility = "";
-  console.log("unhidden");
-}
-
 hideStockBtn.addEventListener("change", async (event) => {
-  let [tab] = await chrome.tabs.query({ active: true });
-
   const value = event.target.checked;
-  if (value) {
-    chrome.scripting.executeScript({
-      target: { tabId: tab.id },
-      function: hideStock,
-    });
-  } else {
-    chrome.scripting.executeScript({
-      target: { tabId: tab.id },
-      function: unHideStock,
-    });
-  }
   const key = "hideStock";
   console.log(`${key}` + " is " + `${value}`);
   setChromeStorage(key, value);
@@ -227,33 +103,8 @@ hideStockBtn.addEventListener("change", async (event) => {
 
 //위젯숨기기
 
-function hideWidget() {
-  const widget = document.querySelector('[aria-label="위젯"]');
-  widget.style.visibility = "hidden";
-  console.log("hidden");
-}
-
-function unHideWidget() {
-  const widget = document.querySelector('[aria-label="위젯"]');
-  widget.style.visibility = "";
-  console.log("unhidden");
-}
-
 hideWidgetBtn.addEventListener("change", async (event) => {
-  let [tab] = await chrome.tabs.query({ active: true });
-
   const value = event.target.checked;
-  if (value) {
-    chrome.scripting.executeScript({
-      target: { tabId: tab.id },
-      function: hideWidget,
-    });
-  } else {
-    chrome.scripting.executeScript({
-      target: { tabId: tab.id },
-      function: unHideWidget,
-    });
-  }
   const key = "hideWidget";
   console.log(`${key}` + " is " + `${value}`);
   setChromeStorage(key, value);
