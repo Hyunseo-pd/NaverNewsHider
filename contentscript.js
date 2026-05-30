@@ -11,15 +11,35 @@ const HIDE_TARGETS = {
 const STORAGE_KEYS = Object.keys(HIDE_TARGETS);
 
 //숨김적용
-function setVisibility(selector, shouldHide) {
+function waitForElement(selector, callback) {
   const element = document.querySelector(selector);
 
-  if (!element) {
-    console.log("요소를 찾을 수 없음:", selector);
+  if (element) {
+    callback(element);
     return;
   }
 
-  element.style.visibility = shouldHide ? "hidden" : "";
+  const observer = new MutationObserver(() => {
+    const element = document.querySelector(selector);
+
+    if (!element) {
+      return;
+    }
+
+    observer.disconnect();
+    callback(element);
+  });
+
+  observer.observe(document.documentElement, {
+    childList: true,
+    subtree: true,
+  });
+}
+
+function setVisibility(selector, shouldHide) {
+  waitForElement(selector, (element) => {
+    element.style.visibility = shouldHide ? "hidden" : "";
+  });
 }
 
 //개별설정
