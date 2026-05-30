@@ -1,142 +1,94 @@
-const hideContentBtn = document.querySelector("#hideControl #hideContent");
-const hideNewsBtn = document.querySelector("#hideControl #hideNews");
-const hideShoppingBtn = document.querySelector("#hideControl #hideShopping");
-const hideFeedBtn = document.querySelector("#hideControl #hideFeed");
+const STORAGE_KEYS = [
+  "hideContent",
+  "hideNews",
+  "hideShopping",
+  "hideFeed",
+  "hideSidebar",
+  "hideWeather",
+  "hideStock",
+  "hideWidget",
+];
 
-const hideSidebarBtn = document.querySelector("#hideControl #hideSidebar");
-const hideWeatherBtn = document.querySelector("#hideControl #hideWeather");
-const hideStockBtn = document.querySelector("#hideControl #hideStock");
-const hideWidgetBtn = document.querySelector("#hideControl #hideWidget");
-
-const setChromeStorage = (key, value, callback) => {
-  return new Promise((resolve, reject) => {
-    chrome.storage.sync
-      .set({ [key]: value })
-      .then(() => {
-        if (typeof callback === "function") {
-          callback();
-        }
-        resolve(true);
-      })
-      .catch(() => reject(false));
-    // exceed limit case
-  });
+const GROUPS = {
+  hideContent: ["hideNews", "hideShopping", "hideFeed"],
+  hideSidebar: ["hideWeather", "hideStock", "hideWidget"],
 };
 
-//콘텐츠 숨기기
-hideContentBtn.addEventListener("change", (event) => {
-  const value = event.target.checked;
+//체크박스찾기
+function getCheckbox(key) {
+  return document.querySelector(`#hideControl #${key} input`);
+}
 
-  hideNewsBtn.querySelector("input").checked = value;
-  hideShoppingBtn.querySelector("input").checked = value;
-  hideFeedBtn.querySelector("input").checked = value;
+//ui바꾸기
+function setCheckbox(key, value) {
+  const checkbox = getCheckbox(key);
 
-  chrome.storage.sync.set({
-    hideContent: value,
-    hideNews: value,
-    hideShopping: value,
-    hideFeed: value,
+  if (!checkbox) {
+    return;
+  }
+
+  checkbox.checked = value;
+}
+
+//스토리지저장
+function saveStorage(keyOrValues, value) {
+  const values =
+    typeof keyOrValues === "string" ? { [keyOrValues]: value } : keyOrValues;
+
+  console.log("save storage:", values);
+  return chrome.storage.sync.set(values);
+}
+
+//개별항목이벤트리스너등록
+function bindSetting(key) {
+  const checkbox = getCheckbox(key);
+
+  if (!checkbox) {
+    return;
+  }
+
+  checkbox.addEventListener("change", (event) => {
+    saveStorage(key, event.target.checked);
   });
-});
+}
 
-//뉴스 숨기기
+//그룹항목이벤트리스너등록
+function bindGroup(groupKey) {
+  const groupCheckbox = getCheckbox(groupKey);
+  const childKeys = GROUPS[groupKey];
 
-hideNewsBtn.addEventListener("change", async (event) => {
-  const value = event.target.checked;
+  if (!groupCheckbox) {
+    return;
+  }
 
-  const key = "hideNews";
-  console.log(`${key}` + " is " + `${value}`);
-  setChromeStorage(key, value);
-});
+  groupCheckbox.addEventListener("change", (event) => {
+    const value = event.target.checked;
+    const values = { [groupKey]: value };
 
-//피드 숨기기
+    childKeys.forEach((childKey) => {
+      setCheckbox(childKey, value);
+      values[childKey] = value;
+    });
 
-hideFeedBtn.addEventListener("change", async (event) => {
-  const value = event.target.checked;
-  const key = "hideFeed";
-  console.log(`${key}` + " is " + `${value}`);
-  setChromeStorage(key, value);
-});
-
-//쇼핑숨기기
-
-hideShoppingBtn.addEventListener("change", async (event) => {
-  const value = event.target.checked;
-  const key = "hideShopping";
-  console.log(`${key}` + " is " + `${value}`);
-  setChromeStorage(key, value);
-});
-
-//사이드바 숨기기
-
-hideSidebarBtn.addEventListener("change", (event) => {
-  const value = event.target.checked;
-
-  hideWeatherBtn.querySelector("input").checked = value;
-  hideStockBtn.querySelector("input").checked = value;
-  hideWidgetBtn.querySelector("input").checked = value;
-
-  chrome.storage.sync.set({
-    hideSidebar: value,
-    hideWeather: value,
-    hideStock: value,
-    hideWidget: value,
+    saveStorage(values);
   });
+}
+
+//불러오기,실행
+function loadPopupState() {
+  chrome.storage.sync.get(STORAGE_KEYS, (settings) => {
+    STORAGE_KEYS.forEach((key) => {
+      setCheckbox(key, settings[key]);
+    });
+  });
+}
+
+Object.keys(GROUPS).forEach((groupKey) => {
+  bindGroup(groupKey);
 });
 
-//날씨 숨기기
-
-hideWeatherBtn.addEventListener("change", async (event) => {
-  const value = event.target.checked;
-  const key = "hideWeather";
-  console.log(`${key}` + " is " + `${value}`);
-  setChromeStorage(key, value);
+STORAGE_KEYS.filter((key) => !GROUPS[key]).forEach((key) => {
+  bindSetting(key);
 });
 
-//증시숨기기
-
-hideStockBtn.addEventListener("change", async (event) => {
-  const value = event.target.checked;
-  const key = "hideStock";
-  console.log(`${key}` + " is " + `${value}`);
-  setChromeStorage(key, value);
-});
-
-//위젯숨기기
-
-hideWidgetBtn.addEventListener("change", async (event) => {
-  const value = event.target.checked;
-  const key = "hideWidget";
-  console.log(`${key}` + " is " + `${value}`);
-  setChromeStorage(key, value);
-});
-
-/*function setCheckBox(label, value) {
-  label.querySelector("input").checked = value;
-}*/
-
-//불러오기
-chrome.storage.sync.get(
-  [
-    "hideContent",
-    "hideNews",
-    "hideShopping",
-    "hideFeed",
-
-    "hideSidebar",
-    "hideWeather",
-    "hideStock",
-    "hideWidget",
-  ],
-  async (result) => {
-    hideContentBtn.querySelector("input").checked = await result.hideContent;
-    hideNewsBtn.querySelector("input").checked = await result.hideNews;
-    hideShoppingBtn.querySelector("input").checked = await result.hideShopping;
-    hideFeedBtn.querySelector("input").checked = await result.hideFeed;
-
-    hideSidebarBtn.querySelector("input").checked = await result.hideSidebar;
-    hideStockBtn.querySelector("input").checked = await result.hideWeather;
-    hideWeatherBtn.querySelector("input").checked = await result.hideStock;
-    hideWidgetBtn.querySelector("input").checked = await result.hideWidget;
-  },
-);
+loadPopupState();
