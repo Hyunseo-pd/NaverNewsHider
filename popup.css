@@ -47,6 +47,7 @@ hr {
 [type="checkbox"]::before {
   content: "";
   position: absolute;
+  top: 0;
   left: 0;
   width: 1em;
   height: 1em;
@@ -55,6 +56,7 @@ hr {
   background-color: #bfbfbf;
   transition: left 250ms linear;
 }
+
 [type="checkbox"]:checked::before {
   background-color: white;
   left: 1em;
@@ -83,7 +85,7 @@ hr {
   outline: max(2px, 0.1em) solid tomato;
 }
 [type="checkbox"]:enabled:hover {
-  box-shadow: 0 0 0 max(3px, 0.1em) lightgray;
+  box-shadow: 0 0 0 max(3px, 0.1em) #e9e9e9;
 }
 
 .tree-parent {
@@ -93,9 +95,6 @@ hr {
 }
 
 .tree-toggle {
-  position: relative;
-  width: 10px;
-  height: 10px;
   border: 0;
   padding: 0;
   background: transparent;
@@ -121,15 +120,24 @@ hr {
   display: none;
 }
 
-ul {
-  list-style: none;
+.indiv-parent {
+  display: inline-flex;
+  gap: 0.5rem;
+}
+
+.tree-toggle,
+.tree-spacer {
+  position: relative;
+  width: 10px;
+  height: 10px;
+  flex: 0 0 10px;
 }
 
 .contentList,
 .sidebarList {
   list-style: none;
   padding-left: 2rem;
-  margin-top: 0.2rem;
+  margin: 0.2rem 0 0.5rem;
 }
 
 .toggle-row {
