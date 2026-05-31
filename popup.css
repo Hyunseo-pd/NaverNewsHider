@@ -21,12 +21,26 @@
   font-weight: 800;
   src: url("../fonts/NanumGothicExtraBold.otf") format("opentype");
 }
+.header {
+  width: 250px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: "NanumGothic";
+  font-weight: 600;
+  font-size: 24px;
+}
+hr {
+  border: 0;
+  height: 0.05rem;
+  background-color: #03c75a;
+}
 
 [type="checkbox"] {
   appearance: none;
   position: relative;
-  border: max(2px, 0.1em) solid #adadad;
-  border-radius: 1.25em;
+  border: max(2px, 0.1em) solid #bfbfbf;
+  border-radius: 2em;
   width: 2.25em;
   height: 1.25em;
 }
@@ -38,7 +52,7 @@
   height: 1em;
   border-radius: 50%;
   transform: scale(0.8);
-  background-color: #adadad;
+  background-color: #bfbfbf;
   transition: left 250ms linear;
 }
 [type="checkbox"]:checked::before {
@@ -47,17 +61,17 @@
 }
 
 [type="checkbox"]:checked {
-  background-color: #2db400;
-  border-color: #2db400;
+  background-color: #03c75a;
+  border-color: #03c75a;
 }
 [type="checkbox"]:disabled {
-  border-color: lightgray;
+  border-color: #bfbfbf;
   opacity: 0.7;
   cursor: not-allowed;
 }
 
-[type="checkbox"]:disabled:before {
-  background-color: lightgray;
+[type="checkbox"]:disabled::before {
+  background-color: #bfbfbf;
 }
 
 [type="checkbox"]:disabled + span {
@@ -72,118 +86,66 @@
   box-shadow: 0 0 0 max(3px, 0.1em) lightgray;
 }
 
-.header {
-  width: 250px;
+.tree-parent {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  font-family: "NanumGothic";
-  font-weight: 600;
-  font-size: 24px;
 }
 
-hr {
+.tree-toggle {
+  position: relative;
+  width: 10px;
+  height: 10px;
   border: 0;
-  height: 0.05rem;
-  background-color: #2db400;
+  padding: 0;
+  background: transparent;
+  cursor: pointer;
+}
+.tree-toggle::before,
+.tree-toggle::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 10px;
+  height: 2px;
+  background-color: #bfbfbf;
+  border-radius: 999px;
+  transform: translate(-50%, -50%);
+}
+.tree-toggle::after {
+  transform: translate(-50%, -50%) rotate(90deg);
+}
+
+.tree-toggle[aria-expanded="true"]::after {
+  display: none;
 }
 
 ul {
   list-style: none;
-  padding-left: 1rem;
+}
+
+.contentList,
+.sidebarList {
+  list-style: none;
+  padding-left: 2rem;
   margin-top: 0.2rem;
-  margin-bottom: 0.2rem;
 }
 
-/*.contentList :before {
-  content: "";
-  width: 0.1rem;
-  height: calc(100% - 12rem);
-  background-color: #cccccc;
-  position: absolute;
-  left: 1rem;
-  top: 5.2rem;
-}
-.sidebarList :before {
-  content: "";
-  width: 0.1rem;
-  height: calc(100% - 12rem);
-  background-color: #cccccc;
-  position: absolute;
-  left: 1rem;
-  top: 11.5rem;
-}*/
-#hideContent {
+.toggle-row {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
   cursor: pointer;
+  font-size: 16px;
+}
+
+.toggle-row--parent {
   font-family: "NanumGothic";
   font-weight: 400;
-  font-size: 16px;
 }
 
-#hideNews {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  cursor: pointer;
+.toggle-row--child {
   font-family: "NanumGothicLight";
   font-weight: 200;
-  font-size: 16px;
-}
-#hideShopping {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  cursor: pointer;
-  font-family: "NanumGothicLight";
-  font-weight: 200;
-  font-size: 16px;
-}
-
-#hideFeed {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  cursor: pointer;
-  font-family: "NanumGothicLight";
-  font-weight: 200;
-  font-size: 16px;
-}
-#hideSidebar {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  cursor: pointer;
-  font-family: "NanumGothic";
-  font-weight: 400;
-  font-size: 16px;
-}
-#hideWeather {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  cursor: pointer;
-  font-family: "NanumGothicLight";
-  font-weight: 200;
-  font-size: 16px;
-}
-#hideStock {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  cursor: pointer;
-  font-family: "NanumGothicLight";
-  font-weight: 200;
-  font-size: 16px;
-}
-#hideWidget {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  cursor: pointer;
-  font-family: "NanumGothicLight";
-  font-weight: 200;
-  font-size: 16px;
 }

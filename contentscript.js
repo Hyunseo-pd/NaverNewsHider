@@ -7,6 +7,7 @@ const HIDE_TARGETS = {
   hideWeather: '[aria-label="날씨"]',
   hideStock: '[aria-label="증시"]',
   hideWidget: '[aria-label="위젯"]',
+  hideLogin: '[aria-label="로그인 정보"]',
 };
 const STORAGE_KEYS = Object.keys(HIDE_TARGETS);
 

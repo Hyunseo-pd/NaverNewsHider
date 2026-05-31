@@ -12,56 +12,81 @@
       <span class="title">Better Naver</span>
     </header>
     <hr />
-    <div id="hideControl">
-      <label id="hideContent">
-        <input type="checkbox" />
-        <span>콘텐츠 숨기기</span>
-      </label>
 
-      <ul class="contentList">
-        <li>
-          <label id="hideNews">
+    <div id="hideControl">
+      <section class="tree-group" data-group="content">
+        <div class="tree-parent">
+          <button
+            class="tree-toggle"
+            type="button"
+            aria-expanded="true"
+          ></button>
+          <label id="hideContent" class="toggle-row toggle-row--parent">
             <input type="checkbox" />
-            <span>뉴스 숨기기</span>
+            <span>콘텐츠 숨기기</span>
           </label>
-        </li>
-        <li>
-          <label id="hideShopping">
+        </div>
+        <ul class="contentList">
+          <li>
+            <label id="hideNews" class="toggle-row toggle-row--child">
+              <input type="checkbox" />
+              <span>뉴스 숨기기</span>
+            </label>
+          </li>
+          <li>
+            <label id="hideShopping" class="toggle-row toggle-row--child">
+              <input type="checkbox" />
+              <span>쇼핑 숨기기</span>
+            </label>
+          </li>
+          <li>
+            <label id="hideFeed" class="toggle-row toggle-row--child">
+              <input type="checkbox" />
+              <span>피드 숨기기</span>
+            </label>
+          </li>
+        </ul>
+      </section>
+
+      <section class="tree-group" data-group="sidebar">
+        <div class="tree-parent">
+          <button
+            class="tree-toggle"
+            type="button"
+            aria-expanded="true"
+          ></button>
+          <label id="hideSidebar" class="toggle-row toggle-row--parent">
             <input type="checkbox" />
-            <span>쇼핑 숨기기</span>
+            <span>사이드바 숨기기</span>
           </label>
-        </li>
-        <li>
-          <label id="hideFeed">
-            <input type="checkbox" />
-            <span>피드 숨기기</span>
-          </label>
-        </li>
-      </ul>
-      <label id="hideSidebar">
+        </div>
+        <ul class="sidebarList">
+          <li>
+            <label id="hideWeather" class="toggle-row toggle-row--child">
+              <input type="checkbox" />
+              <span>날씨 숨기기</span>
+            </label>
+          </li>
+          <li>
+            <label id="hideStock" class="toggle-row toggle-row--child">
+              <input type="checkbox" />
+              <span>증시 숨기기</span>
+            </label>
+          </li>
+          <li>
+            <label id="hideWidget" class="toggle-row toggle-row--child">
+              <input type="checkbox" />
+              <span>위젯 숨기기</span>
+            </label>
+          </li>
+        </ul>
+      </section>
+
+      <span class="tree-spacer"></span>
+      <label id="hideLogin" class="toggle-row toggle-row--parent">
         <input type="checkbox" />
-        <span>사이드바 숨기기</span>
+        <span>로그인 정보 숨기기</span>
       </label>
-      <ul class="sidebarList">
-        <li>
-          <label id="hideWeather">
-            <input type="checkbox" />
-            <span>날씨 숨기기</span>
-          </label>
-        </li>
-        <li>
-          <label id="hideStock">
-            <input type="checkbox" />
-            <span>증시 숨기기</span>
-          </label>
-        </li>
-        <li>
-          <label id="hideWidget">
-            <input type="checkbox" />
-            <span>위젯 숨기기</span>
-          </label>
-        </li>
-      </ul>
     </div>
     <script src="popup.js"></script>
   </body>
