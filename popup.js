@@ -37,7 +37,6 @@ function saveStorage(keyOrValues, value) {
   const values =
     typeof keyOrValues === "string" ? { [keyOrValues]: value } : keyOrValues;
 
-  console.log("save storage:", values);
   return chrome.storage.sync.set(values);
 }
 
