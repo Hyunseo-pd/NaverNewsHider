@@ -32,6 +32,16 @@ function setCheckbox(key, value) {
   checkbox.checked = value;
 }
 
+function setGroupCheckbox(groupKey, value) {
+  const checkbox = getCheckbox(groupKey);
+
+  if (!checkbox) {
+    return;
+  }
+
+  checkbox.checked = value;
+}
+
 //스토리지저장
 function saveStorage(keyOrValues, value) {
   const values =
@@ -149,6 +159,21 @@ STORAGE_KEYS.filter((key) => !GROUPS[key]).forEach((key) => {
 });
 
 loadPopupState();
+
+chrome.storage.onChanged.addListener((changes, areaName) => {
+  console.log(changes, areaName);
+  if (areaName !== "sync") {
+    return;
+  }
+  chrome.storage.sync.get(STORAGE_KEYS, (settings) => {
+    Object.values(GROUPS).forEach((group) =>
+      setGroupCheckbox(
+        Object.keys(GROUPS).find((key) => GROUPS[key] === group),
+        group.some((element) => settings[element]),
+      ),
+    );
+  });
+});
 
 Object.keys(COLLAPSE_KEYS).forEach((groupName) => {
   bindTreeToggle(groupName);

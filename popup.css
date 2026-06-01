@@ -163,10 +163,11 @@ hr {
   position: absolute;
   left: 5px;
   top: 0rem;
-  bottom: 0.5rem;
+  bottom: 0.7rem;
   width: 2px;
   border-radius: 999px;
   background-color: #bfbfbf;
+  transform: translateX(-50%);
 }
 
 .contentList li,
@@ -178,11 +179,12 @@ hr {
 .sidebarList li::before {
   content: "";
   position: absolute;
-  left: -1.25rem;
+  left: -1.4rem;
   top: 0.6rem;
   width: 1rem;
   height: 2px;
   background-color: #bfbfbf;
+  transform: translate(-50% -50%);
 }
 
 .toggle-row {
