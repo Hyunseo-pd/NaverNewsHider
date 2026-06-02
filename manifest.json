@@ -22,6 +22,6 @@
       "run_at": "document_idle"
     }
   ],
-  "permissions": ["tabs", "activeTab", "scripting", "storage"],
+  "permissions": ["storage"],
   "host_permissions": ["*://*.naver.com/*"]
 }
